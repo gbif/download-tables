@@ -1,0 +1,4 @@
+# Project exclude paths
+/hdfs-tables/target/
+/maven-extension-avsc-schema-generator/target/
+/term-utils/target/
