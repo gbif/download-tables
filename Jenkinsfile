@@ -48,7 +48,7 @@ pipeline {
             globalMavenSettingsConfig: 'org.jenkinsci.plugins.configfiles.maven.GlobalMavenSettingsConfig1387378707709',
             mavenSettingsConfig: 'org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig1396361652540',
             traceability: true) {
-              git 'https://github.com/djtfmartin/download-tables.git'
+              git 'https://github.com/gbif/download-tables.git'
               sh '''
                 mvn -B -Dresume=false release:prepare release:perform site site:stage scm-publish:publish-scm $RELEASE_ARGS
                 '''
