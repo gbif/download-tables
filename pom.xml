@@ -13,6 +13,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <name>Download tables</name>
+  <description>
+    Common utilities to create and manage download tables.
+    Created largely to avoid circular dependencies between occurrence and pipelines
+    projects.
+  </description>
 
   <repositories>
     <repository>
