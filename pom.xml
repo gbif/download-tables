@@ -19,6 +19,12 @@
     projects.
   </description>
 
+  <scm>
+    <connection>scm:git:git@github.com:gbif/download-tables.git</connection>
+    <url>https://github.com/gbif/download-tables</url>
+    <developerConnection>scm:git:git@github.com:gbif/download-tables.git</developerConnection>
+  </scm>
+
   <repositories>
     <repository>
       <id>gbif-all</id>
@@ -45,16 +51,7 @@
       <url>https://repository.gbif.org/repository/thirdparty-snapshot/</url>
     </repository>
   </repositories>
-  <distributionManagement>
-    <repository>
-      <id>gbif-release</id>
-      <url>http://repository.gbif.org/content/repositories/releases</url>
-    </repository>
-    <snapshotRepository>
-      <id>gbif-snapshot</id>
-      <url>http://repository.gbif.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
+
   <modules>
     <module>term-utils</module>
     <module>maven-extension-avsc-schema-generator</module>
@@ -89,6 +86,34 @@
     <junit-jupiter.version>5.12.2</junit-jupiter.version>
 
   </properties>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>https://raw.github.com/gbif/motherpom/master/LICENSE</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <organization>
+    <name>Global Biodiversity Information Facility (GBIF)</name>
+    <url>https://www.gbif.org</url>
+  </organization>
+
+  <distributionManagement>
+    <site>
+      <id>gh-pages</id>
+      <url>http://gbif.github.io/occurrence/</url>
+    </site>
+    <repository>
+      <id>gbif-release</id>
+      <url>https://repository.gbif.org/content/repositories/releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>gbif-deploy</id>
+      <url>https://repository.gbif.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
 
   <dependencyManagement>
     <dependencies>
