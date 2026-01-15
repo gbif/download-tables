@@ -103,7 +103,7 @@
   <distributionManagement>
     <site>
       <id>gh-pages</id>
-      <url>http://gbif.github.io/occurrence/</url>
+      <url>http://gbif.github.io/download-tables/</url>
     </site>
     <repository>
       <id>gbif-release</id>

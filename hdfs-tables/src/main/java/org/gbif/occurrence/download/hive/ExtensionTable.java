@@ -81,11 +81,6 @@ public class ExtensionTable {
     return schema.getName().toLowerCase().replace("table", "");
   }
 
-  public static Map<String, ExtensionTable> getExtensionTableMap() {
-    return tableExtensions().stream()
-            .collect(Collectors.toMap(ExtensionTable::getHiveTableName, et -> et));
-  }
-
   public String getDirectoryTableName() {
     return schema.getName().toLowerCase();
   }
