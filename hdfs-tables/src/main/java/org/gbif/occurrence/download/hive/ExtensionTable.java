@@ -44,7 +44,6 @@ public class ExtensionTable {
 
   private static final Map<Extension,Schema> EXTENSION_TABLES = ExtensionSchemasLoader.extensionTablesMap();
 
-  //Section used to distinguish class names in the same packages
   private final String leafNamespace;
 
   private final Schema schema;
@@ -79,7 +78,7 @@ public class ExtensionTable {
   }
 
   public String getHiveTableName() {
-    return leafNamespace + '_' + schema.getName().toLowerCase().replace("table", "");
+    return schema.getName().toLowerCase().replace("table", "");
   }
 
   public String getDirectoryTableName() {
