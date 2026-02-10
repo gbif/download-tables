@@ -13,6 +13,8 @@
  */
 package org.gbif.occurrence.download.hive;
 
+import java.util.List;
+
 import org.apache.avro.Schema;
 import org.apache.avro.SchemaBuilder;
 
@@ -35,7 +37,9 @@ public class OccurrenceAvroHdfsTableDefinition {
     SchemaBuilder.FieldAssembler<Schema> builder = SchemaBuilder
       .record("OccurrenceHdfsRecord")
       .namespace("org.gbif.pipelines.io.avro").fields();
-    OccurrenceHDFSTableDefinition.definition().forEach(initializableField -> avroField(builder, initializableField));
+
+    List<InitializableField> fields = OccurrenceHDFSTableDefinition.definition();
+    fields.forEach(initializableField -> avroField(builder, initializableField));
     return builder.endRecord();
   }
 

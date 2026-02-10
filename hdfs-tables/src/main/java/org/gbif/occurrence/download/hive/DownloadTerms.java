@@ -13,20 +13,20 @@
  */
 package org.gbif.occurrence.download.hive;
 
+import org.gbif.dwc.terms.DcTerm;
+import org.gbif.dwc.terms.DwcTerm;
+import org.gbif.dwc.terms.GbifInternalTerm;
+import org.gbif.dwc.terms.GbifTerm;
+import org.gbif.dwc.terms.IucnTerm;
+import org.gbif.dwc.terms.Term;
+import org.gbif.terms.utils.TermUtils;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.gbif.dwc.terms.DcTerm;
-import org.gbif.dwc.terms.DwcTerm;
-import org.gbif.dwc.terms.EcoTerm;
-import org.gbif.dwc.terms.GbifInternalTerm;
-import org.gbif.dwc.terms.GbifTerm;
-import org.gbif.dwc.terms.IucnTerm;
-import org.gbif.dwc.terms.Term;
-import org.gbif.terms.utils.TermUtils;
 
 /**
  * Definitions of terms used in downloading, and in create tables used during the download process.
@@ -47,7 +47,11 @@ public class DownloadTerms {
           GbifInternalTerm.fragmentHash, // omitted entirely
           GbifInternalTerm.fragment, // omitted entirely
           GbifTerm.numberOfOccurrences,
-          GbifInternalTerm.humboldtEventDurationValueInMinutes);
+          GbifInternalTerm.humboldtEventDurationValueInMinutes,
+          DwcTerm.projectID // projectId is both in Dwc(events) and GbifTerm but it is included only
+          // one time since the column name is lowercased but it has different meaning in events and
+          // in occurrences
+      );
 
   /** This set is used for the HDFS table definition */
   public static final Set<Term> EXCLUSIONS_HDFS =
