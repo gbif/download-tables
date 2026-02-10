@@ -13,18 +13,19 @@
  */
 package org.gbif.occurrence.download.hive;
 
-import static org.gbif.occurrence.download.hive.HiveColumns.cleanDelimitersArrayInitializer;
-import static org.gbif.occurrence.download.hive.HiveColumns.cleanDelimitersInitializer;
-import static org.gbif.occurrence.download.hive.HiveColumns.columnFor;
-import static org.gbif.occurrence.download.hive.HiveColumns.getVerbatimColPrefix;
+import org.gbif.api.vocabulary.Extension;
+import org.gbif.dwc.terms.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import lombok.experimental.UtilityClass;
-import org.gbif.api.vocabulary.Extension;
-import org.gbif.dwc.terms.*;
+
+import static org.gbif.occurrence.download.hive.HiveColumns.cleanDelimitersArrayInitializer;
+import static org.gbif.occurrence.download.hive.HiveColumns.cleanDelimitersInitializer;
+import static org.gbif.occurrence.download.hive.HiveColumns.columnFor;
+import static org.gbif.occurrence.download.hive.HiveColumns.getVerbatimColPrefix;
 
 /**
  * This provides the definition required to construct the occurrence HDFS table, for use as a Hive table.

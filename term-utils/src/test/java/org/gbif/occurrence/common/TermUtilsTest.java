@@ -20,11 +20,11 @@ import org.gbif.dwc.terms.GbifInternalTerm;
 import org.gbif.dwc.terms.GbifTerm;
 import org.gbif.dwc.terms.Term;
 import org.gbif.dwc.terms.TermFactory;
+import org.gbif.terms.utils.TermUtils;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import org.gbif.terms.utils.TermUtils;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

@@ -13,17 +13,17 @@
  */
 package org.gbif.occurrence.download.hive;
 
-import org.apache.avro.Schema;
 import org.gbif.api.vocabulary.Extension;
 import org.gbif.dwc.terms.GbifTerm;
 import org.gbif.dwc.terms.Term;
+import org.gbif.dwc.terms.TermFactory;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import org.gbif.dwc.terms.TermFactory;
+import org.apache.avro.Schema;
 import org.junit.jupiter.api.Test;
 
 import static org.gbif.occurrence.download.hive.HiveColumns.cleanDelimitersInitializer;

@@ -15,8 +15,6 @@ package org.gbif.occurrence.download.hive;
 
 import org.gbif.dwc.terms.Term;
 
-//import javax.annotation.concurrent.Immutable;
-
 import lombok.Data;
 
 import static org.gbif.occurrence.download.hive.HiveColumns.escapeColumnName;

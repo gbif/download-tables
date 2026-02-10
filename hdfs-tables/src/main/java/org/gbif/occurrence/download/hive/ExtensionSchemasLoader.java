@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 
 import org.apache.avro.Schema;
 
-
 import lombok.SneakyThrows;
 
 /**
