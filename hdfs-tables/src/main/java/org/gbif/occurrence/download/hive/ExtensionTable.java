@@ -52,6 +52,10 @@ public class ExtensionTable {
 
   private final Term term;
 
+  public String getLeafNamespace() {
+    return leafNamespace;
+  }
+
   public static Set<Extension> getSupportedExtensions() {
     return EXTENSION_TABLES.keySet();
   }
