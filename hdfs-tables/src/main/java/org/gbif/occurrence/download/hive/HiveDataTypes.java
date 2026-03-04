@@ -13,12 +13,7 @@
  */
 package org.gbif.occurrence.download.hive;
 
-import org.gbif.dwc.terms.DcTerm;
-import org.gbif.dwc.terms.DwcTerm;
-import org.gbif.dwc.terms.EcoTerm;
-import org.gbif.dwc.terms.GbifInternalTerm;
-import org.gbif.dwc.terms.GbifTerm;
-import org.gbif.dwc.terms.Term;
+import org.gbif.dwc.terms.*;
 import org.gbif.terms.utils.TermUtils;
 
 import java.util.AbstractMap;
@@ -104,7 +99,12 @@ public final class HiveDataTypes {
           EcoTerm.protocolReferences,
           EcoTerm.voucherInstitutions,
           EcoTerm.materialSampleTypes,
-          EcoTerm.samplingPerformedBy);
+          EcoTerm.samplingPerformedBy,
+          DwcTerm.projectTitle,
+          DwcTerm.fundingAttribution,
+          DwcTerm.fundingAttributionID,
+          DwcTerm.measurementType,
+          ObisTerm.measurementTypeID);
 
   // dates are all stored as BigInt
   private static final Set<Term> BIGINT_TERMS =

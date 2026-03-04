@@ -13,12 +13,7 @@
  */
 package org.gbif.occurrence.download.hive;
 
-import org.gbif.dwc.terms.DcTerm;
-import org.gbif.dwc.terms.DwcTerm;
-import org.gbif.dwc.terms.GbifInternalTerm;
-import org.gbif.dwc.terms.GbifTerm;
-import org.gbif.dwc.terms.IucnTerm;
-import org.gbif.dwc.terms.Term;
+import org.gbif.dwc.terms.*;
 import org.gbif.terms.utils.TermUtils;
 
 import java.util.Set;
@@ -47,10 +42,7 @@ public class DownloadTerms {
           GbifInternalTerm.fragmentHash, // omitted entirely
           GbifInternalTerm.fragment, // omitted entirely
           GbifTerm.numberOfOccurrences,
-          GbifInternalTerm.humboldtEventDurationValueInMinutes,
-          DwcTerm.projectID // projectId is both in Dwc(events) and GbifTerm but it is included only
-          // one time since the column name is lowercased but it has different meaning in events and
-          // in occurrences
+          GbifInternalTerm.humboldtEventDurationValueInMinutes
       );
 
   /** This set is used for the HDFS table definition */
@@ -66,7 +58,12 @@ public class DownloadTerms {
           GbifTerm.lithostratigraphy,
           GbifTerm.biostratigraphy,
           GbifTerm.dnaSequenceID,
-          GbifTerm.checklistKey);
+          GbifTerm.checklistKey,
+          DwcTerm.projectTitle,
+          DwcTerm.fundingAttribution,
+          DwcTerm.fundingAttributionID,
+          DwcTerm.measurementType,
+          ObisTerm.measurementTypeID);
 
   /** Terms not used in DWCA downloads. */
   public static final Set<Term> EXCLUSIONS_DOWNLOAD =
