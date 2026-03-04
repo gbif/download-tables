@@ -13,19 +13,17 @@
  */
 package org.gbif.occurrence.download.hive;
 
-import org.gbif.api.vocabulary.Extension;
-import org.gbif.dwc.terms.*;
-
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import lombok.experimental.UtilityClass;
-
 import static org.gbif.occurrence.download.hive.HiveColumns.cleanDelimitersArrayInitializer;
 import static org.gbif.occurrence.download.hive.HiveColumns.cleanDelimitersInitializer;
 import static org.gbif.occurrence.download.hive.HiveColumns.columnFor;
 import static org.gbif.occurrence.download.hive.HiveColumns.getVerbatimColPrefix;
+
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import lombok.experimental.UtilityClass;
+import org.gbif.api.vocabulary.Extension;
+import org.gbif.dwc.terms.*;
 
 /**
  * This provides the definition required to construct the occurrence HDFS table, for use as a Hive table.
@@ -163,7 +161,7 @@ public class OccurrenceHDFSTableDefinition {
    */
   private static List<InitializableField> extensions() {
     // only MULTIMEDIA is supported, but coded for future use
-    Set<Extension> extensions = Set.of(Extension.MULTIMEDIA, Extension.HUMBOLDT);
+    Set<Extension> extensions = Set.of(Extension.MULTIMEDIA);
 
     List<InitializableField> result = new ArrayList<>();
 
@@ -181,8 +179,6 @@ public class OccurrenceHDFSTableDefinition {
   private static Term extensionTerm(Extension extension) {
     if (Extension.MULTIMEDIA == extension) {
       return GbifTerm.Multimedia;
-    } else if (Extension.HUMBOLDT == extension) {
-      return GbifTerm.Humboldt;
     } else {
       return UnknownTerm.build(extension.name());
     }

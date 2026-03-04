@@ -13,6 +13,10 @@
  */
 package org.gbif.terms.utils;
 
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.gbif.api.model.occurrence.Occurrence;
 import org.gbif.dwc.terms.DcTerm;
 import org.gbif.dwc.terms.DwcTerm;
@@ -21,13 +25,9 @@ import org.gbif.dwc.terms.GadmTerm;
 import org.gbif.dwc.terms.GbifInternalTerm;
 import org.gbif.dwc.terms.GbifTerm;
 import org.gbif.dwc.terms.IucnTerm;
+import org.gbif.dwc.terms.ObisTerm;
 import org.gbif.dwc.terms.Term;
 import org.gbif.predicate.query.SQLColumnsUtils;
-
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * This class serves to document the terms used in various stages of processing.  Please note that changes to this
@@ -363,7 +363,11 @@ public class TermUtils {
       DwcTerm.minimumElevationInMeters,
       DwcTerm.maximumElevationInMeters,
       DwcTerm.associatedMedia,
-      DwcTerm.eventType)
+      DwcTerm.eventType,
+      DwcTerm.projectID,
+      DwcTerm.projectTitle,
+      DwcTerm.fundingAttribution,
+      DwcTerm.fundingAttributionID)
   ).flatMap(Function.identity()).collect(Collectors.toSet());
 
   /**
@@ -537,7 +541,8 @@ public class TermUtils {
         // add all GADM terms (none are stripped during interpretation, but filter anyway).
         GADM_PROPERTIES.stream().filter(t -> !TERMS_REMOVED_DURING_INTERPRETATION.contains(t)),
         //IUCN RedList Category
-        Stream.of(IucnTerm.iucnRedListCategory)
+        // measurementType added here since it's excluded before and it shouldn't be in the verbatim fields
+        Stream.of(IucnTerm.iucnRedListCategory, ObisTerm.measurementTypeID, DwcTerm.measurementType)
     ).reduce(Stream::concat).orElseGet(Stream::empty).collect(Collectors.toList());
   }
 
@@ -557,17 +562,6 @@ public class TermUtils {
     return Stream.concat(
             Stream.of(GbifTerm.gbifID),
             MULTIMEDIA_TERMS.stream()
-    ).collect(Collectors.toList());
-  }
-
-  /**
-   * Lists all terms relevant for a humboldt extension record.
-   * gbifID is included and comes first as it is the foreign key to the core record.
-   */
-  public static Iterable<Term> humboldtTerms() {
-    return Stream.concat(
-            Stream.of(GbifTerm.gbifID),
-            DOWNLOAD_HUMBOLDT_TERMS.stream()
     ).collect(Collectors.toList());
   }
 
