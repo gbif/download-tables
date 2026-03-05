@@ -566,6 +566,17 @@ public class TermUtils {
   }
 
   /**
+   * Lists all terms relevant for a humboldt extension record.
+   * gbifID is included and comes first as it is the foreign key to the core record.
+   */
+  public static Iterable<Term> humboldtTerms() {
+    return Stream.concat(
+            Stream.of(GbifTerm.gbifID),
+            DOWNLOAD_HUMBOLDT_TERMS.stream()
+        ).collect(Collectors.toList());
+  }
+
+  /**
    * @return true if the term is an interpreted local date (timezone not relevant)
    */
   public static boolean isInterpretedLocalDateSeconds(Term term) {
