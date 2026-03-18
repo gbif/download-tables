@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.gbif.download</groupId>
     <artifactId>download-tables-motherpom</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.3.0-SNAPSHOT</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
