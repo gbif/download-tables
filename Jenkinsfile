@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  parameters {
+    booleanParam(name: 'RELEASE', defaultValue: false, description: 'Make a Maven release')
+  }
   tools {
     maven 'Maven 3.9.9'
     jdk 'OpenJDK17'
