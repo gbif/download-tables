@@ -161,7 +161,7 @@ public class OccurrenceHDFSTableDefinition {
    */
   private static List<InitializableField> extensions() {
     // only MULTIMEDIA is supported, but coded for future use
-    Set<Extension> extensions = Set.of(Extension.MULTIMEDIA);
+    Set<Extension> extensions = Set.of(Extension.MULTIMEDIA, Extension.DNA_DERIVED_DATA);
 
     List<InitializableField> result = new ArrayList<>();
 
@@ -179,7 +179,10 @@ public class OccurrenceHDFSTableDefinition {
   private static Term extensionTerm(Extension extension) {
     if (Extension.MULTIMEDIA == extension) {
       return GbifTerm.Multimedia;
-    } else {
+    } else if (Extension.DNA_DERIVED_DATA == extension) {
+      return GbifTerm.DnaDerivedData;
+    }
+    else {
       return UnknownTerm.build(extension.name());
     }
   }
