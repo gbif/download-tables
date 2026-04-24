@@ -180,7 +180,7 @@ public class OccurrenceHDFSTableDefinition {
     if (Extension.MULTIMEDIA == extension) {
       return GbifTerm.Multimedia;
     } else if (Extension.DNA_DERIVED_DATA == extension) {
-      return GbifTerm.DnaDerivedData;
+      return GbifTerm.DNADerivedData;
     }
     else {
       return UnknownTerm.build(extension.name());
