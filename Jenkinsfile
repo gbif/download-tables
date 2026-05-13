@@ -79,7 +79,7 @@ pipeline {
             traceability: true) {
               git 'https://github.com/gbif/download-tables.git'
               sh '''
-                mvn -B -Dresume=false release:prepare release:perform site site:stage scm-publish:publish-scm $RELEASE_ARGS
+                mvn -B -Dresume=false release:prepare release:perform $RELEASE_ARGS
                 '''
             }
       }
