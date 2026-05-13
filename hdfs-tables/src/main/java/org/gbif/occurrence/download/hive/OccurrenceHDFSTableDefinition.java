@@ -160,7 +160,6 @@ public class OccurrenceHDFSTableDefinition {
    * @return the list of fields that are exposed through Hive
    */
   private static List<InitializableField> extensions() {
-    // only MULTIMEDIA is supported, but coded for future use
     Set<Extension> extensions = Set.of(Extension.MULTIMEDIA, Extension.DNA_DERIVED_DATA);
 
     List<InitializableField> result = new ArrayList<>();
@@ -181,8 +180,7 @@ public class OccurrenceHDFSTableDefinition {
       return GbifTerm.Multimedia;
     } else if (Extension.DNA_DERIVED_DATA == extension) {
       return GbifTerm.DNADerivedData;
-    }
-    else {
+    } else {
       return UnknownTerm.build(extension.name());
     }
   }
