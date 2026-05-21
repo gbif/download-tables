@@ -25,6 +25,7 @@ import org.gbif.dwc.terms.GadmTerm;
 import org.gbif.dwc.terms.GbifInternalTerm;
 import org.gbif.dwc.terms.GbifTerm;
 import org.gbif.dwc.terms.IucnTerm;
+import org.gbif.dwc.terms.MixsTerm;
 import org.gbif.dwc.terms.ObisTerm;
 import org.gbif.dwc.terms.Term;
 import org.gbif.predicate.query.SQLColumnsUtils;
@@ -457,6 +458,8 @@ public class TermUtils {
 
   public static final List<Term> DOWNLOAD_HUMBOLDT_TERMS = downloadHumboldtTerms();
 
+  public static final List<Term> DOWNLOAD_SEQUENCE_TERMS = downloadSequenceTerms();
+
   private TermUtils() {
     // private constructor
   }
@@ -483,6 +486,23 @@ public class TermUtils {
     terms.add(GbifTerm.taxonKey);
     terms.add(GbifTerm.taxonomicIssue);
     EXCLUSION_DOWNLOAD_HUMBOLDT.forEach(terms::remove);
+    return terms;
+  }
+
+  private static List<Term> downloadSequenceTerms() {
+    List<Term> terms = new ArrayList<>();
+    terms.add(GbifInternalTerm.nucleotide_nucleotideSequenceID);
+    terms.add(MixsTerm.target_gene);
+    terms.add(GbifInternalTerm.nucleotide_sequenceLength);
+    terms.add(GbifInternalTerm.nucleotide_gcContent);
+    terms.add(GbifInternalTerm.nucleotide_nonIupacFraction);
+    terms.add(GbifInternalTerm.nucleotide_nonACGTNFraction);
+    terms.add(GbifInternalTerm.nucleotide_nFraction);
+    terms.add(GbifInternalTerm.nucleotide_nRunsCapped);
+    terms.add(GbifInternalTerm.nucleotide_naturalLanguageDetected);
+    terms.add(GbifInternalTerm.nucleotide_endsTrimmed);
+    terms.add(GbifInternalTerm.nucleotide_gapsOrWhitespaceRemoved);
+    terms.add(GbifInternalTerm.nucleotide_invalid);
     return terms;
   }
 
