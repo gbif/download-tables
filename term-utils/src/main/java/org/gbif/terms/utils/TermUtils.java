@@ -597,6 +597,17 @@ public class TermUtils {
   }
 
   /**
+   * Lists all terms relevant for the dna sequence extension record.
+   * gbifID is included and comes first as it is the foreign key to the core
+   */
+  public static Iterable<Term> sequenceTerms() {
+    return Stream.concat(
+            Stream.of(GbifTerm.gbifID),
+            DOWNLOAD_SEQUENCE_TERMS.stream()
+        ).collect(Collectors.toList());
+  }
+
+  /**
    * @return true if the term is an interpreted local date (timezone not relevant)
    */
   public static boolean isInterpretedLocalDateSeconds(Term term) {
