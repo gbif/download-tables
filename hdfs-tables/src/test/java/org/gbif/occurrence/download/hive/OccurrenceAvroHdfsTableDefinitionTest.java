@@ -14,6 +14,7 @@
 package org.gbif.occurrence.download.hive;
 
 import org.gbif.dwc.terms.DwcTerm;
+import org.gbif.dwc.terms.GbifInternalTerm;
 import org.gbif.dwc.terms.GbifTerm;
 import org.gbif.dwc.terms.ObisTerm;
 import org.gbif.dwc.terms.Term;
@@ -41,6 +42,7 @@ public class OccurrenceAvroHdfsTableDefinitionTest {
     assertContainsTerm(GbifTerm.dnaSequenceID);
     assertContainsTerm(DwcTerm.measurementType);
     assertContainsTerm(ObisTerm.measurementTypeID);
+    assertContainsTerm(GbifInternalTerm.datasetCategory);
   }
 
   private void assertContainsTerm(Term term) {
