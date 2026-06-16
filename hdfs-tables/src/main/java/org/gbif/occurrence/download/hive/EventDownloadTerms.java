@@ -17,6 +17,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.gbif.dwc.terms.*;
 import org.gbif.terms.utils.EventTermUtils;
 
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -62,7 +63,7 @@ public class EventDownloadTerms {
   private static Set<Term> difference(List<Term> source, Set<Term> exclusions) {
     return source.stream()
             .filter(t -> !exclusions.contains(t))
-            .collect(Collectors.toCollection(LinkedHashSet::new));
+            .collect(Collectors.collectingAndThen(Collectors.toCollection(LinkedHashSet::new), Collections::unmodifiableSet));
   }
 
   public static final Set<Term> DOWNLOAD_INTERPRETED_TERMS_HDFS =
@@ -86,7 +87,7 @@ public class EventDownloadTerms {
         difference(EventTermUtils.verbatimTerms(), EXCLUSIONS_HDFS);
 
   public static final Set<Pair<Group, Term>> SIMPLE_DOWNLOAD_TERMS =
-      new LinkedHashSet<>(List.of(
+      Collections.unmodifiableSet(new LinkedHashSet<>(List.of(
           Pair.of(Group.INTERPRETED, GbifTerm.gbifID),
           Pair.of(Group.INTERPRETED, GbifTerm.datasetKey),
           Pair.of(Group.INTERPRETED, DwcTerm.eventID),
@@ -114,7 +115,7 @@ public class EventDownloadTerms {
           Pair.of(Group.INTERPRETED, DcTerm.rightsHolder),
           Pair.of(Group.INTERPRETED, GbifTerm.lastInterpreted),
           Pair.of(Group.INTERPRETED, GbifTerm.mediaType),
-          Pair.of(Group.INTERPRETED, GbifTerm.issue)));
+          Pair.of(Group.INTERPRETED, GbifTerm.issue))));
 
 
   public static String simpleName(Pair<Group, Term> termPair) {
