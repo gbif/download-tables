@@ -13,6 +13,13 @@
  */
 package org.gbif.occurrence.common;
 
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.HashSet;
+import java.util.Set;
 import org.gbif.api.vocabulary.Extension;
 import org.gbif.dwc.terms.DcTerm;
 import org.gbif.dwc.terms.DwcTerm;
@@ -20,19 +27,11 @@ import org.gbif.dwc.terms.GbifInternalTerm;
 import org.gbif.dwc.terms.GbifTerm;
 import org.gbif.dwc.terms.Term;
 import org.gbif.dwc.terms.TermFactory;
+import org.gbif.terms.utils.EventTermUtils;
 import org.gbif.terms.utils.TermUtils;
-
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-/**
- *
- */
+/** */
 public class TermUtilsTest {
 
   @Test
@@ -54,7 +53,6 @@ public class TermUtilsTest {
       terms.add(t);
     }
   }
-
 
   @Test
   public void testExtensionTerms() throws Exception {
@@ -94,5 +92,18 @@ public class TermUtilsTest {
   public void testIsInterpretedNumerical() throws Exception {
     assertTrue(TermUtils.isInterpretedNumerical(DwcTerm.year));
     assertFalse(TermUtils.isInterpretedNumerical(DwcTerm.occurrenceID));
+  }
+
+  /**
+   * Minimum test to check that the order is ok. Ideally we should test all the elements.
+   */
+  @Test
+  public void orderTest() {
+    assertEquals(GbifTerm.gbifID, TermUtils.interpretedTerms().get(0));
+    assertEquals(GbifTerm.gbifID, TermUtils.multimediaTerms().iterator().next());
+    assertEquals(GbifTerm.gbifID, TermUtils.verbatimTerms().get(0));
+    assertEquals(GbifTerm.gbifID, TermUtils.humboldtTerms().iterator().next());
+    assertEquals(GbifTerm.gbifID, EventTermUtils.interpretedTerms().get(0));
+    assertEquals(GbifTerm.gbifID, EventTermUtils.verbatimTerms().get(0));
   }
 }
