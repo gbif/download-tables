@@ -16,6 +16,8 @@ package org.gbif.occurrence.download.hive;
 import org.gbif.dwc.terms.*;
 import org.gbif.terms.utils.TermUtils;
 
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -74,19 +76,19 @@ public class DownloadTerms {
   public static final Set<Term> DOWNLOAD_INTERPRETED_TERMS_HDFS =
           TermUtils.interpretedTerms().stream()
                   .filter(term -> !EXCLUSIONS_HDFS.contains(term))
-                  .collect(Collectors.toUnmodifiableSet());
+                  .collect(Collectors.toCollection(LinkedHashSet::new));
 
   /** The interpreted terms included in a DWCA download. */
   public static final Set<Term> DOWNLOAD_INTERPRETED_TERMS =
           TermUtils.interpretedTerms().stream()
                   .filter(term -> !EXCLUSIONS_DOWNLOAD.contains(term))
-                  .collect(Collectors.toUnmodifiableSet());
+                  .collect(Collectors.toCollection(LinkedHashSet::new));
 
   /** The interpreted terms included in a DWCA download, with GBIFID first. */
   public static final Set<Term> DOWNLOAD_INTERPRETED_TERMS_WITH_GBIFID =
           TermUtils.interpretedTerms().stream()
                   .filter(term -> !EXCLUSIONS_DWCA_DOWNLOAD.contains(term))
-                  .collect(Collectors.toUnmodifiableSet());
+                  .collect(Collectors.toCollection(LinkedHashSet::new));
 
   /*
    * The verbatim terms included in a DWCA download.
@@ -94,7 +96,7 @@ public class DownloadTerms {
   public static final Set<Term> DOWNLOAD_VERBATIM_TERMS =
           TermUtils.verbatimTerms().stream()
                   .filter(term -> !EXCLUSIONS_HDFS.contains(term))
-                  .collect(Collectors.toUnmodifiableSet());
+                  .collect(Collectors.toCollection(LinkedHashSet::new));
 
   /*
    * The multimedia terms included in a DWCA download.
@@ -102,14 +104,14 @@ public class DownloadTerms {
   public static final Set<Term> DOWNLOAD_MULTIMEDIA_TERMS =
           StreamSupport.stream(TermUtils.multimediaTerms().spliterator(), false)
                   .filter(term -> !EXCLUSIONS_HDFS.contains(term))
-                  .collect(Collectors.toSet());
+                  .collect(Collectors.toCollection(LinkedHashSet::new));
 
   /**
    * The terms that will be included in the interpreted table if also present in ${@link
    * TermUtils#interpretedTerms()}
    */
   public static final Set<Pair<Group, Term>> SIMPLE_DOWNLOAD_TERMS =
-      Set.of(
+      new LinkedHashSet<>(List.of(
           Pair.of(Group.INTERPRETED, GbifTerm.gbifID),
           Pair.of(Group.INTERPRETED, GbifTerm.datasetKey),
           Pair.of(Group.INTERPRETED, DwcTerm.occurrenceID),
@@ -159,27 +161,27 @@ public class DownloadTerms {
           Pair.of(Group.INTERPRETED, DwcTerm.establishmentMeans),
           Pair.of(Group.INTERPRETED, GbifTerm.lastInterpreted),
           Pair.of(Group.INTERPRETED, GbifTerm.mediaType),
-          Pair.of(Group.INTERPRETED, GbifTerm.issue));
+          Pair.of(Group.INTERPRETED, GbifTerm.issue)));
 
   /** The additional terms that will be included in the SIMPLE_WITH_VERBATIM_AVRO download */
   private static final Set<Pair<Group, Term>> ADDITIONAL_SIMPLE_WITH_VERBATIM_DOWNLOAD_TERMS =
-      Set.of(
+      new LinkedHashSet<>(List.of(
           Pair.of(Group.INTERPRETED, GbifTerm.kingdomKey),
           Pair.of(Group.INTERPRETED, GbifTerm.phylumKey),
           Pair.of(Group.INTERPRETED, GbifTerm.classKey),
           Pair.of(Group.INTERPRETED, GbifTerm.orderKey),
           Pair.of(Group.INTERPRETED, GbifTerm.familyKey),
           Pair.of(Group.INTERPRETED, GbifTerm.genusKey),
-          Pair.of(Group.INTERPRETED, GbifTerm.publishingCountry));
+          Pair.of(Group.INTERPRETED, GbifTerm.publishingCountry)));
 
   /** The terms that will be included in the SIMPLE_WITH_VERBATIM_AVRO download */
   public static final Set<Pair<Group, Term>> SIMPLE_WITH_VERBATIM_DOWNLOAD_TERMS =
           Stream.concat(SIMPLE_DOWNLOAD_TERMS.stream(), ADDITIONAL_SIMPLE_WITH_VERBATIM_DOWNLOAD_TERMS.stream())
-          .collect(Collectors.toSet());
+          .collect(Collectors.toCollection(LinkedHashSet::new));
 
   /** The terms that will be included in the species list */
   public static final Set<Pair<Group, Term>> SPECIES_LIST_TERMS =
-          Set.of(
+          new LinkedHashSet<>(List.of(
           Pair.of(Group.INTERPRETED, GbifTerm.gbifID),
           Pair.of(Group.INTERPRETED, GbifTerm.datasetKey),
           Pair.of(Group.INTERPRETED, DwcTerm.occurrenceID),
@@ -204,11 +206,11 @@ public class DownloadTerms {
           Pair.of(Group.INTERPRETED, GbifTerm.species),
           Pair.of(Group.INTERPRETED, GbifTerm.speciesKey),
           Pair.of(Group.INTERPRETED, IucnTerm.iucnRedListCategory),
-          Pair.of(Group.INTERPRETED, DcTerm.license));
+          Pair.of(Group.INTERPRETED, DcTerm.license)));
 
   /** The terms that will be included in the species list for downloads */
   public static final Set<Pair<Group, Term>> SPECIES_LIST_DOWNLOAD_TERMS =
-          Set.of(
+          new LinkedHashSet<>(List.of(
           Pair.of(Group.INTERPRETED, GbifTerm.taxonKey),
           Pair.of(Group.INTERPRETED, DwcTerm.scientificName),
           Pair.of(Group.INTERPRETED, GbifTerm.acceptedTaxonKey),
@@ -230,7 +232,7 @@ public class DownloadTerms {
           Pair.of(Group.INTERPRETED, GbifTerm.genusKey),
           Pair.of(Group.INTERPRETED, GbifTerm.species),
           Pair.of(Group.INTERPRETED, GbifTerm.speciesKey),
-          Pair.of(Group.INTERPRETED, IucnTerm.iucnRedListCategory));
+          Pair.of(Group.INTERPRETED, IucnTerm.iucnRedListCategory)));
 
   /** GBIF-Internal terms included in downloads (so why are they internal?) */
   public static final Set<Term> INTERNAL_DOWNLOAD_TERMS =
