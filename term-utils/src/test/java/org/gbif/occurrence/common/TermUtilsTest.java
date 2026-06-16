@@ -104,5 +104,6 @@ public class TermUtilsTest {
     assertEquals(GbifTerm.gbifID, TermUtils.verbatimTerms().get(0));
     assertEquals(GbifTerm.gbifID, TermUtils.humboldtTerms().iterator().next());
     assertEquals(GbifTerm.gbifID, EventTermUtils.interpretedTerms().get(0));
+    assertEquals(GbifTerm.gbifID, EventTermUtils.verbatimTerms().get(0));
   }
 }
