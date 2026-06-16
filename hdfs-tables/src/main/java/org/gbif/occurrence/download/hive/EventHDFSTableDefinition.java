@@ -13,13 +13,14 @@
  */
 package org.gbif.occurrence.download.hive;
 
-import lombok.experimental.UtilityClass;
 import org.gbif.api.vocabulary.Extension;
 import org.gbif.dwc.terms.*;
 import org.gbif.terms.utils.EventTermUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import lombok.experimental.UtilityClass;
 
 import static org.gbif.occurrence.download.hive.HiveColumns.*;
 

@@ -13,7 +13,6 @@
  */
 package org.gbif.occurrence.download.hive;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.gbif.dwc.terms.*;
 import org.gbif.terms.utils.EventTermUtils;
 
@@ -23,6 +22,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import static org.gbif.occurrence.download.hive.DownloadTerms.Group;
 
