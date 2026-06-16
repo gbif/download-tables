@@ -17,8 +17,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.gbif.dwc.terms.*;
 import org.gbif.terms.utils.EventTermUtils;
 
-import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -60,34 +58,34 @@ public class EventDownloadTerms {
           Stream.concat(EXCLUSIONS_INTERPRETED.stream(),
                   EXCLUSIONS_DWCA_DOWNLOAD.stream()).collect(Collectors.toSet());
 
-  private static Set<Term> difference(List<Term> source, Set<Term> exclusions) {
+  private static List<Term> difference(List<Term> source, Set<Term> exclusions) {
     return source.stream()
             .filter(t -> !exclusions.contains(t))
-            .collect(Collectors.collectingAndThen(Collectors.toCollection(LinkedHashSet::new), Collections::unmodifiableSet));
+            .collect(Collectors.toUnmodifiableList());
   }
 
-  public static final Set<Term> DOWNLOAD_INTERPRETED_TERMS_HDFS =
+  public static final List<Term> DOWNLOAD_INTERPRETED_TERMS_HDFS =
           difference(EventTermUtils.interpretedTerms(), EXCLUSIONS_HDFS);
 
-  public static final Set<Term> DOWNLOAD_INTERNAL_TERMS_HDFS =
+  public static final List<Term> DOWNLOAD_INTERNAL_TERMS_HDFS =
           difference(EventTermUtils.internalTerms(), EXCLUSIONS_HDFS);
 
   /** The interpreted terms included in a DWCA download. */
-  public static final Set<Term> DOWNLOAD_INTERPRETED_TERMS =
+  public static final List<Term> DOWNLOAD_INTERPRETED_TERMS =
           difference(EventTermUtils.interpretedTerms(), EXCLUSIONS_DOWNLOAD);
 
   /** The interpreted terms included in a DWCA download, with GBIFID first. */
-  public static final Set<Term> DOWNLOAD_INTERPRETED_TERMS_WITH_GBIFID =
+  public static final List<Term> DOWNLOAD_INTERPRETED_TERMS_WITH_GBIFID =
           difference(EventTermUtils.interpretedTerms(), EXCLUSIONS_DWCA_DOWNLOAD);
 
   /*
    * The verbatim terms included in a DWCA download.
    */
-  public static final Set<Term> DOWNLOAD_VERBATIM_TERMS =
+  public static final List<Term> DOWNLOAD_VERBATIM_TERMS =
         difference(EventTermUtils.verbatimTerms(), EXCLUSIONS_HDFS);
 
-  public static final Set<Pair<Group, Term>> SIMPLE_DOWNLOAD_TERMS =
-      Collections.unmodifiableSet(new LinkedHashSet<>(List.of(
+  public static final List<Pair<Group, Term>> SIMPLE_DOWNLOAD_TERMS =
+      List.of(
           Pair.of(Group.INTERPRETED, GbifTerm.gbifID),
           Pair.of(Group.INTERPRETED, GbifTerm.datasetKey),
           Pair.of(Group.INTERPRETED, DwcTerm.eventID),
@@ -115,7 +113,7 @@ public class EventDownloadTerms {
           Pair.of(Group.INTERPRETED, DcTerm.rightsHolder),
           Pair.of(Group.INTERPRETED, GbifTerm.lastInterpreted),
           Pair.of(Group.INTERPRETED, GbifTerm.mediaType),
-          Pair.of(Group.INTERPRETED, GbifTerm.issue))));
+          Pair.of(Group.INTERPRETED, GbifTerm.issue));
 
 
   public static String simpleName(Pair<Group, Term> termPair) {

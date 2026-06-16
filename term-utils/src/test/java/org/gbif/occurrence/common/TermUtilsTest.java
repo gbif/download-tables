@@ -99,11 +99,10 @@ public class TermUtilsTest {
    */
   @Test
   public void orderTest() {
-    assertEquals("gbifID", TermUtils.interpretedTerms().get(0).simpleName());
-    assertEquals("gbifID", TermUtils.multimediaTerms().iterator().next().simpleName());
-    assertEquals("gbifID", TermUtils.verbatimTerms().get(0).simpleName());
-    assertEquals("gbifID", TermUtils.humboldtTerms().iterator().next().simpleName());
-    assertEquals("gbifID", EventTermUtils.interpretedTerms().get(0).simpleName());
-    assertEquals("gbifID", EventTermUtils.verbatimTerms().get(0).simpleName());
+    assertEquals(GbifTerm.gbifID, TermUtils.interpretedTerms().get(0));
+    assertEquals(GbifTerm.gbifID, TermUtils.multimediaTerms().iterator().next());
+    assertEquals(GbifTerm.gbifID, TermUtils.verbatimTerms().get(0));
+    assertEquals(GbifTerm.gbifID, TermUtils.humboldtTerms().iterator().next());
+    assertEquals(GbifTerm.gbifID, EventTermUtils.interpretedTerms().get(0));
   }
 }
