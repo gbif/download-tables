@@ -462,7 +462,7 @@ public class TermUtils {
 
   public static final List<Term> DOWNLOAD_SEQUENCE_TERMS = downloadSequenceTerms();
 
-  public static final Set<Term> DOWNLOAD_DNA_TERMS = downloadDnaTerms();
+  public static final List<Term> DOWNLOAD_DNA_TERMS = downloadDnaTerms();
 
   private TermUtils() {
     // private constructor
@@ -510,8 +510,8 @@ public class TermUtils {
     return terms;
   }
 
-  private static Set<Term> downloadDnaTerms() {
-    Set<Term> terms = new LinkedHashSet<>();
+  private static List<Term> downloadDnaTerms() {
+    List<Term> terms = new ArrayList<>();
     terms.add(MixsTerm.target_gene);
     terms.add(GbifDnaTerm.dna_sequence);
     return terms;
