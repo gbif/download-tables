@@ -67,8 +67,8 @@
 
     <!-- GBIF -->
     <dwca-io.version>3.0.1</dwca-io.version>
-    <gbif-api.version>2.4.11</gbif-api.version>
-    <dwc-api.version>2.1.11</dwc-api.version>
+    <gbif-api.version>2.4.12-SNAPSHOT</gbif-api.version>
+    <dwc-api.version>2.1.12-SNAPSHOT</dwc-api.version>
     <gbif-predicates.version>2.1.2</gbif-predicates.version>
 
     <!-- Maven plugins -->
