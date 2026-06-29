@@ -278,6 +278,7 @@ public class TermUtils {
       GbifInternalTerm.installationKey,
       GbifInternalTerm.publishingOrgKey,
       GbifInternalTerm.networkKey,
+      GbifInternalTerm.datasetCategory,
       GbifTerm.mediaType,
       DcTerm.license,
       DwcTerm.occurrenceStatus,

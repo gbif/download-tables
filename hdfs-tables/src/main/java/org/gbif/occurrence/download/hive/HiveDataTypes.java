@@ -64,6 +64,7 @@ public final class HiveDataTypes {
           GbifTerm.mediaType,
           GbifTerm.issue,
           GbifInternalTerm.networkKey,
+          GbifInternalTerm.datasetCategory,
           DwcTerm.recordedByID,
           DwcTerm.identifiedByID,
           GbifInternalTerm.dwcaExtension,
