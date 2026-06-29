@@ -13,7 +13,9 @@
  */
 package org.gbif.occurrence.download.hive;
 
+import org.apache.avro.Schema;
 import org.gbif.dwc.terms.DwcTerm;
+import org.gbif.dwc.terms.GbifInternalTerm;
 import org.gbif.dwc.terms.GbifTerm;
 import org.gbif.dwc.terms.ObisTerm;
 import org.gbif.dwc.terms.Term;
@@ -41,6 +43,9 @@ public class OccurrenceAvroHdfsTableDefinitionTest {
     assertContainsTerm(GbifTerm.dnaSequenceID);
     assertContainsTerm(DwcTerm.measurementType);
     assertContainsTerm(ObisTerm.measurementTypeID);
+    assertContainsTerm(GbifInternalTerm.datasetCategory);
+    assertTermDataType(GbifInternalTerm.datasetCategory, HiveDataTypes.TYPE_ARRAY_STRING);
+    assertAvroArrayStringField(OccurrenceAvroHdfsTableDefinition.avroDefinition(), GbifInternalTerm.datasetCategory);
   }
 
   private void assertContainsTerm(Term term) {
@@ -59,5 +64,25 @@ public class OccurrenceAvroHdfsTableDefinitionTest {
     Assertions.assertTrue(
       OccurrenceHDFSTableDefinition.definition().stream()
         .anyMatch(t -> t.getColumnName().equals(column)));
+  }
+
+  private void assertTermDataType(Term term, String dataType) {
+    Assertions.assertTrue(
+      OccurrenceHDFSTableDefinition.definition().stream()
+        .anyMatch(t -> t.getColumnName().equals(term.simpleName().toLowerCase())
+          && t.getHiveDataType().equals(dataType)));
+  }
+
+  private void assertAvroArrayStringField(Schema schema, Term term) {
+    Schema fieldSchema = schema.getField(term.simpleName().toLowerCase()).schema();
+    Assertions.assertTrue(
+      fieldSchema.getTypes().stream()
+        .anyMatch(type -> type.getType() == Schema.Type.ARRAY && isNullableString(type.getElementType())));
+  }
+
+  private boolean isNullableString(Schema schema) {
+    return schema.getType() == Schema.Type.STRING
+      || schema.getType() == Schema.Type.UNION
+        && schema.getTypes().stream().anyMatch(type -> type.getType() == Schema.Type.STRING);
   }
 }
