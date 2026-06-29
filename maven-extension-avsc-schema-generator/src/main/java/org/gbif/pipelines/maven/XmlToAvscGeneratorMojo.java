@@ -13,6 +13,7 @@
  */
 package org.gbif.pipelines.maven;
 
+import org.gbif.api.util.TermNormalizationUtils;
 import org.gbif.api.vocabulary.Extension;
 import org.gbif.dwc.digester.ThesaurusHandlingRule;
 import org.gbif.dwc.extensions.ExtensionFactory;
@@ -125,7 +126,7 @@ public class XmlToAvscGeneratorMojo extends AbstractMojo {
         extFieldName = TERM_FACTORY.findTerm(ep.qualifiedName()).prefixedName();
       }
 
-      String fName = normalizeFieldName(extFieldName);
+      String fName = TermNormalizationUtils.normalizeFieldName(extFieldName);
       // Add fields
       fields.add(createField(fName, ep.getQualname()));
       // Add RAW fields
@@ -160,17 +161,6 @@ public class XmlToAvscGeneratorMojo extends AbstractMojo {
             .map(x -> x.substring(0, 1).toUpperCase() + x.substring(1))
             .collect(Collectors.joining())
         + "Table";
-  }
-
-  private String normalizeFieldName(String name) {
-    String normalizedNamed = name.toLowerCase().trim()
-      .replace("-", "")
-      .replace("_", "")
-      .replace(":", "_");
-    if (Character.isDigit(normalizedNamed.charAt(0))) {
-      return '_' + normalizedNamed;
-    }
-    return normalizedNamed;
   }
 
   private String normalizeFileName(String name) {

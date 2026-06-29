@@ -13,10 +13,11 @@
  */
 package org.gbif.occurrence.download.hive;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import org.apache.avro.Schema;
 import org.apache.avro.SchemaBuilder;
+
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AvroDataTypes {

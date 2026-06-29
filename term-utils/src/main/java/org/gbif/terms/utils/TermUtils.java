@@ -13,21 +13,24 @@
  */
 package org.gbif.terms.utils;
 
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.gbif.api.model.occurrence.Occurrence;
 import org.gbif.dwc.terms.DcTerm;
 import org.gbif.dwc.terms.DwcTerm;
 import org.gbif.dwc.terms.EcoTerm;
 import org.gbif.dwc.terms.GadmTerm;
+import org.gbif.dwc.terms.GbifDnaTerm;
 import org.gbif.dwc.terms.GbifInternalTerm;
 import org.gbif.dwc.terms.GbifTerm;
 import org.gbif.dwc.terms.IucnTerm;
+import org.gbif.dwc.terms.MixsTerm;
 import org.gbif.dwc.terms.ObisTerm;
 import org.gbif.dwc.terms.Term;
 import org.gbif.predicate.query.SQLColumnsUtils;
+
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * This class serves to document the terms used in various stages of processing.  Please note that changes to this
@@ -458,6 +461,10 @@ public class TermUtils {
 
   public static final List<Term> DOWNLOAD_HUMBOLDT_TERMS = downloadHumboldtTerms();
 
+  public static final List<Term> DOWNLOAD_SEQUENCE_TERMS = downloadSequenceTerms();
+
+  public static final List<Term> DOWNLOAD_DNA_TERMS = downloadDnaTerms();
+
   private TermUtils() {
     // private constructor
   }
@@ -484,6 +491,30 @@ public class TermUtils {
     terms.add(GbifTerm.taxonKey);
     terms.add(GbifTerm.taxonomicIssue);
     EXCLUSION_DOWNLOAD_HUMBOLDT.forEach(terms::remove);
+    return terms;
+  }
+
+  private static List<Term> downloadSequenceTerms() {
+    List<Term> terms = new ArrayList<>();
+    terms.add(GbifInternalTerm.nucleotide_nucleotideSequenceID);
+    terms.add(MixsTerm.target_gene);
+    terms.add(GbifInternalTerm.nucleotide_sequenceLength);
+    terms.add(GbifInternalTerm.nucleotide_gcContent);
+    terms.add(GbifInternalTerm.nucleotide_nonIupacFraction);
+    terms.add(GbifInternalTerm.nucleotide_nonACGTNFraction);
+    terms.add(GbifInternalTerm.nucleotide_nFraction);
+    terms.add(GbifInternalTerm.nucleotide_nRunsCapped);
+    terms.add(GbifInternalTerm.nucleotide_naturalLanguageDetected);
+    terms.add(GbifInternalTerm.nucleotide_endsTrimmed);
+    terms.add(GbifInternalTerm.nucleotide_gapsOrWhitespaceRemoved);
+    terms.add(GbifInternalTerm.nucleotide_invalid);
+    return terms;
+  }
+
+  private static List<Term> downloadDnaTerms() {
+    List<Term> terms = new ArrayList<>();
+    terms.add(MixsTerm.target_gene);
+    terms.add(GbifDnaTerm.dna_sequence);
     return terms;
   }
 
@@ -575,6 +606,26 @@ public class TermUtils {
             Stream.of(GbifTerm.gbifID),
             DOWNLOAD_HUMBOLDT_TERMS.stream()
         ).collect(Collectors.toList());
+  }
+
+  /**
+   * Lists all terms relevant for the fasta sequences file.
+   * gbifID is included and comes first as it is the foreign key to the core
+   */
+  public static Iterable<Term> sequenceTerms() {
+    return Stream.concat(
+            Stream.of(GbifTerm.gbifID),
+            DOWNLOAD_SEQUENCE_TERMS.stream()
+        ).collect(Collectors.toList());
+  }
+
+  /**
+   * Lists all terms relevant for the dna sequence extension record. gbifID is included and comes
+   * first as it is the foreign key to the core
+   */
+  public static Iterable<Term> dnaTerms() {
+    return Stream.concat(Stream.of(GbifTerm.gbifID), DOWNLOAD_DNA_TERMS.stream())
+        .collect(Collectors.toList());
   }
 
   /**
