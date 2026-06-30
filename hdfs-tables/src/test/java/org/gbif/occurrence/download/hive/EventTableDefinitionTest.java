@@ -37,12 +37,19 @@ public class EventTableDefinitionTest {
     assertContainsTerm(ObisTerm.measurementTypeID);
     assertTermDataType(GbifInternalTerm.datasetCategory, HiveDataTypes.TYPE_ARRAY_STRING);
     assertAvroArrayStringField(EventAvroHdfsTableDefinition.avroDefinition(), GbifInternalTerm.datasetCategory);
+    assertNotContainsTerm(GbifInternalTerm.nucleotide_sequence);
   }
 
   private void assertContainsTerm(Term term) {
     Assertions.assertTrue(
         EventHDFSTableDefinition.definition().stream()
             .anyMatch(t -> t.getColumnName().equals(term.simpleName().toLowerCase())));
+  }
+
+  private void assertNotContainsTerm(Term term) {
+    Assertions.assertTrue(
+      EventHDFSTableDefinition.definition().stream()
+        .noneMatch(t -> t.getColumnName().equals(term.simpleName().toLowerCase())));
   }
 
   private void assertTermDataType(Term term, String dataType) {

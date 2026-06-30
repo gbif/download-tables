@@ -45,7 +45,19 @@ public class DownloadTerms {
           GbifInternalTerm.fragmentHash, // omitted entirely
           GbifInternalTerm.fragment, // omitted entirely
           GbifTerm.numberOfOccurrences,
-          GbifInternalTerm.humboldtEventDurationValueInMinutes
+          GbifInternalTerm.humboldtEventDurationValueInMinutes,
+          GbifInternalTerm.nucleotide_nucleotideSequenceID,
+          GbifInternalTerm.nucleotide_sequence,
+          GbifInternalTerm.nucleotide_sequenceLength,
+          GbifInternalTerm.nucleotide_gcContent,
+          GbifInternalTerm.nucleotide_nonIupacFraction,
+          GbifInternalTerm.nucleotide_nonACGTNFraction,
+          GbifInternalTerm.nucleotide_nFraction,
+          GbifInternalTerm.nucleotide_nRunsCapped,
+          GbifInternalTerm.nucleotide_naturalLanguageDetected,
+          GbifInternalTerm.nucleotide_endsTrimmed,
+          GbifInternalTerm.nucleotide_gapsOrWhitespaceRemoved,
+          GbifInternalTerm.nucleotide_invalid
       );
 
   /** This set is used for the HDFS table definition */
