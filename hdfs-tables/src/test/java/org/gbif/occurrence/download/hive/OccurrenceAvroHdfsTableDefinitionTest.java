@@ -46,6 +46,7 @@ public class OccurrenceAvroHdfsTableDefinitionTest {
     assertContainsTerm(GbifInternalTerm.datasetCategory);
     assertTermDataType(GbifInternalTerm.datasetCategory, HiveDataTypes.TYPE_ARRAY_STRING);
     assertAvroArrayStringField(OccurrenceAvroHdfsTableDefinition.avroDefinition(), GbifInternalTerm.datasetCategory);
+    assertNotContainsTerm(GbifInternalTerm.nucleotide_sequence);
   }
 
   private void assertContainsTerm(Term term) {
