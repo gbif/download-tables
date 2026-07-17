@@ -105,7 +105,9 @@ public final class HiveDataTypes {
           DwcTerm.fundingAttribution,
           DwcTerm.fundingAttributionID,
           DwcTerm.measurementType,
-          ObisTerm.measurementTypeID);
+          ObisTerm.measurementTypeID,
+          GbifInternalTerm.taxonKeys
+      );
 
   // dates are all stored as BigInt
   private static final Set<Term> BIGINT_TERMS =
