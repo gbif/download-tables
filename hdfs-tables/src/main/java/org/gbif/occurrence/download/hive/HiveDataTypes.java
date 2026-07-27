@@ -55,7 +55,7 @@ public final class HiveDataTypes {
   public static final String TYPE_MAP_OF_MAP_ARRAY_STRUCT = "MAP<STRING, MAP<STRING, ARRAY<STRING>>>";
   public static final String TYPE_ARRAY_PARENT_STRUCT =
       "ARRAY<STRUCT<id: STRING,eventType: STRING>>";
-  public static final String GEOLOGICAL_RANGE_STRUCT = "STRUCT<gt: FLOAT,lte: FLOAT>";
+  public static final String GEOLOGICAL_RANGE_STRUCT = "STRUCT<gt: DOUBLE,lte: DOUBLE>";
   public static final String TYPE_TIMESTAMP = "TIMESTAMP";
   // An index of types for terms, if used in the interpreted context
   public static final Map<Term, String> TYPED_TERMS;
