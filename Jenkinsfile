@@ -50,6 +50,7 @@ pipeline {
                 not { expression { params.RELEASE } };
                 anyOf {
                     branch 'dev';
+                    branch 'geotime_data_type';
                 }
             }
         }
