@@ -13,10 +13,14 @@
  */
 package org.gbif.occurrence.common;
 
+import org.gbif.dwc.terms.DcTerm;
 import org.gbif.dwc.terms.DwcTerm;
+import org.gbif.dwc.terms.GbifTerm;
+import org.gbif.dwc.terms.ObisTerm;
 import org.gbif.dwc.terms.Term;
 import org.gbif.terms.utils.EventTermUtils;
 
+import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -56,6 +60,41 @@ public class EventTermUtilsTest {
       System.out.println(t.toString());
       assertFalse(terms.contains(t), "Verbatim term exists twice: " + t);
       terms.add(t);
+    }
+  }
+
+  @Test
+  public void interpretedTermsKeepTheirCurrentOrder() {
+    assertInOrder(
+        List.copyOf(EventTermUtils.interpretedTerms()),
+        GbifTerm.gbifID,
+        DcTerm.accessRights,
+        DcTerm.bibliographicCitation,
+        DcTerm.language,
+        DcTerm.publisher,
+        DcTerm.references,
+        DcTerm.rightsHolder,
+        DcTerm.type,
+        DwcTerm.decimalLatitude,
+        GbifTerm.datasetKey,
+        GbifTerm.publishingCountry,
+        GbifTerm.lastInterpreted,
+        DcTerm.modified,
+        GbifTerm.depth,
+        GbifTerm.issue,
+        GbifTerm.projectId,
+        DwcTerm.eventType,
+        DwcTerm.measurementType,
+        ObisTerm.measurementTypeID);
+  }
+
+  private static void assertInOrder(List<Term> actual, Term... expectedOrder) {
+    int previousIndex = -1;
+    for (Term term : expectedOrder) {
+      int index = actual.indexOf(term);
+      assertTrue(index >= 0, "Missing term: " + term);
+      assertTrue(index > previousIndex, "Wrong order for term: " + term);
+      previousIndex = index;
     }
   }
 }

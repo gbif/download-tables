@@ -13,10 +13,13 @@
  */
 package org.gbif.occurrence.download.hive;
 
+import org.gbif.dwc.terms.DcTerm;
 import org.gbif.dwc.terms.DwcTerm;
 import org.gbif.dwc.terms.GbifTerm;
 import org.gbif.dwc.terms.ObisTerm;
+import org.gbif.dwc.terms.Term;
 
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -36,5 +39,52 @@ public class DownloadTermsTest {
         EventDownloadTerms.DOWNLOAD_VERBATIM_TERMS.contains(DwcTerm.measurementType));
     Assertions.assertFalse(
         EventDownloadTerms.DOWNLOAD_VERBATIM_TERMS.contains(ObisTerm.measurementTypeID));
+  }
+
+  @Test
+  public void interpretedTermsKeepTheirCurrentOrder() {
+    assertInOrder(
+        List.copyOf(DownloadTerms.DOWNLOAD_INTERPRETED_TERMS_WITH_GBIFID),
+        DcTerm.accessRights,
+        DcTerm.bibliographicCitation,
+        DcTerm.language,
+        DcTerm.modified,
+        DcTerm.publisher,
+        DcTerm.references,
+        DcTerm.rightsHolder,
+        DcTerm.type,
+        GbifTerm.datasetKey,
+        GbifTerm.publishingCountry,
+        GbifTerm.lastInterpreted,
+        GbifTerm.depth,
+        GbifTerm.issue,
+        GbifTerm.projectId);
+
+    assertInOrder(
+        List.copyOf(DownloadTerms.DOWNLOAD_INTERPRETED_TERMS),
+        DcTerm.accessRights,
+        DcTerm.bibliographicCitation,
+        DcTerm.language,
+        DcTerm.modified,
+        DcTerm.publisher,
+        DcTerm.references,
+        DcTerm.rightsHolder,
+        DcTerm.type,
+        GbifTerm.datasetKey,
+        GbifTerm.publishingCountry,
+        GbifTerm.lastInterpreted,
+        GbifTerm.depth,
+        GbifTerm.issue,
+        GbifTerm.projectId);
+  }
+
+  private static void assertInOrder(List<Term> actual, Term... expectedOrder) {
+    int previousIndex = -1;
+    for (Term term : expectedOrder) {
+      int index = actual.indexOf(term);
+      Assertions.assertTrue(index >= 0, "Missing term: " + term);
+      Assertions.assertTrue(index > previousIndex, "Wrong order for term: " + term);
+      previousIndex = index;
+    }
   }
 }
