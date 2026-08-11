@@ -17,6 +17,7 @@ import org.gbif.api.model.occurrence.Occurrence;
 import org.gbif.dwc.terms.*;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -30,8 +31,8 @@ import static org.gbif.terms.utils.TermUtils.DwC_PROPERTIES;
 /** This class customizes some of the methods and variables of TermUtils to apply them to events. */
 public class EventTermUtils {
 
-  public static final Set<Term> TERMS_POPULATED_BY_INTERPRETATION =
-          Set.of(
+  public static final List<Term> TERMS_POPULATED_BY_INTERPRETATION =
+          List.of(
                   DwcTerm.decimalLatitude,
                   DwcTerm.decimalLongitude,
                   DwcTerm.continent,
@@ -116,7 +117,8 @@ public class EventTermUtils {
                               DwcTerm.verbatimLongitude,
                               DwcTerm.verbatimCoordinates,
                               DwcTerm.geodeticDatum,
-                              DwcTerm.country).stream()).collect(Collectors.toSet());
+                              DwcTerm.country).stream())
+          .collect(Collectors.toCollection(LinkedHashSet::new));
 
   private static final Set<Term> TERMS_REMOVED_DURING_INTERPRETATION =
           TERMS_SUBJECT_TO_INTERPRETATION.stream()
