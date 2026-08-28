@@ -20,8 +20,8 @@ import org.gbif.dwc.terms.ObisTerm;
 import org.gbif.dwc.terms.Term;
 import org.gbif.terms.utils.EventTermUtils;
 
-import java.util.List;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;

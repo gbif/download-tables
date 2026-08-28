@@ -20,6 +20,7 @@ import org.gbif.dwc.terms.ObisTerm;
 import org.gbif.dwc.terms.Term;
 
 import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

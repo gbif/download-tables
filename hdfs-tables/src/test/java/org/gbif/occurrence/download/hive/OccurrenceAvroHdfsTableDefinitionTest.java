@@ -13,13 +13,13 @@
  */
 package org.gbif.occurrence.download.hive;
 
-import org.apache.avro.Schema;
 import org.gbif.dwc.terms.DwcTerm;
 import org.gbif.dwc.terms.GbifInternalTerm;
 import org.gbif.dwc.terms.GbifTerm;
 import org.gbif.dwc.terms.ObisTerm;
 import org.gbif.dwc.terms.Term;
 
+import org.apache.avro.Schema;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
