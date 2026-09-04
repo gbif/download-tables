@@ -116,7 +116,7 @@ public class EventHDFSTableDefinition {
     Map<Term, String> initializers = Map.of(
                                              GbifInternalTerm.publishingOrgKey, columnFor(GbifInternalTerm.publishingOrgKey),
                                              GbifInternalTerm.installationKey, columnFor(GbifInternalTerm.installationKey),
-                                             GbifTerm.projectId, columnFor(GbifTerm.projectId),
+                                             DwcTerm.projectID, columnFor(DwcTerm.projectID),
                                              GbifInternalTerm.programmeAcronym, columnFor(GbifInternalTerm.programmeAcronym),
                                              GbifInternalTerm.hostingOrganizationKey, columnFor(GbifInternalTerm.hostingOrganizationKey),
                                              GbifInternalTerm.dwcaExtension, columnFor(GbifInternalTerm.dwcaExtension),

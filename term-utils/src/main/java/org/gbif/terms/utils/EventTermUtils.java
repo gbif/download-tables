@@ -96,7 +96,7 @@ public class EventTermUtils {
                   GbifTerm.publishedByGbifRegion,
                   DwcTerm.georeferencedBy,
                   DwcTerm.higherGeography,
-                  GbifTerm.projectId,
+                  DwcTerm.projectID,
                   DwcTerm.eventType,
                   DwcTerm.eventID,
                   DwcTerm.parentEventID,

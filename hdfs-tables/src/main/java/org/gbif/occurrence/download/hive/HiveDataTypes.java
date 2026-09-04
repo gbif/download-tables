@@ -118,7 +118,7 @@ public final class HiveDataTypes {
           DwcTerm.preparations,
           DwcTerm.samplingProtocol,
           GbifInternalTerm.parentEventGbifId,
-          GbifTerm.projectId,
+          DwcTerm.projectID,
           DwcTerm.higherGeography,
           DwcTerm.georeferencedBy,
           DwcTerm.associatedSequences,

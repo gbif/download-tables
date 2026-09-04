@@ -186,8 +186,7 @@ public class TermUtils {
     GbifTerm.subgenusKey,
     GbifTerm.speciesKey,
     GbifTerm.taxonomicIssue,
-    IucnTerm.iucnRedListCategory
-    );
+    IucnTerm.iucnRedListCategory);
 
   /**
    * The terms that are present only due to explicit interpretation.  These are often typed explicitly, such as Dates
@@ -311,7 +310,7 @@ public class TermUtils {
       DwcTerm.formation,
       DwcTerm.member,
       DwcTerm.bed,
-      GbifTerm.projectId,
+      DwcTerm.projectID,
       DwcTerm.eventType
     );
 
@@ -566,10 +565,12 @@ public class TermUtils {
         // add all Dublin Core terms that are not stripped during interpretation
         DwC_DC_PROPERTIES.stream().filter(t -> !TERMS_REMOVED_DURING_INTERPRETATION.contains(t)),
         // add all Darwin Core terms that are not stripped during interpretation
-        DwC_PROPERTIES.stream().filter(t -> !TERMS_REMOVED_DURING_INTERPRETATION.contains(t)),
+        DwC_PROPERTIES.stream().filter(t -> !TERMS_REMOVED_DURING_INTERPRETATION.contains(t)).filter(t -> t != DwcTerm.projectID),
         // add all GBIF terms that are not stripped during interpretation
         GBIF_PROPERTIES.stream().filter(t -> !TERMS_REMOVED_DURING_INTERPRETATION.contains(t) && GbifTerm.gbifID != t
           && GbifTerm.coordinateAccuracy != t && GbifTerm.numberOfOccurrences != t),
+        // projectID added back here to preserve the order following the move from GBIFTerm -> DwcTerm
+        Stream.of(DwcTerm.projectID),
         // add all GADM terms (none are stripped during interpretation, but filter anyway).
         GADM_PROPERTIES.stream().filter(t -> !TERMS_REMOVED_DURING_INTERPRETATION.contains(t)),
         //IUCN RedList Category
