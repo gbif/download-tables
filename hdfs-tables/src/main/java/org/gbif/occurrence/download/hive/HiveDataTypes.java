@@ -95,7 +95,8 @@ public final class HiveDataTypes {
          iucnredlistcategory: STRING,
          taxonkeys: ARRAY<STRING>,
          taxonomicissue: ARRAY<STRING>,
-         taxonomicstatus: STRING>
+         taxonomicstatus: STRING
+         >
        """;
 
   // An index of types for terms, if used in the interpreted context
