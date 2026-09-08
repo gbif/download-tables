@@ -59,7 +59,7 @@ public class DownloadTermsTest {
         GbifTerm.lastInterpreted,
         GbifTerm.depth,
         GbifTerm.issue,
-        GbifTerm.projectId);
+        DwcTerm.projectID);
 
     assertInOrder(
         List.copyOf(DownloadTerms.DOWNLOAD_INTERPRETED_TERMS),
@@ -76,15 +76,16 @@ public class DownloadTermsTest {
         GbifTerm.lastInterpreted,
         GbifTerm.depth,
         GbifTerm.issue,
-        GbifTerm.projectId);
+        DwcTerm.projectID);
   }
 
   private static void assertInOrder(List<Term> actual, Term... expectedOrder) {
     int previousIndex = -1;
     for (Term term : expectedOrder) {
       int index = actual.indexOf(term);
+      System.out.println("Checking term: " + term + ", index: " + index + ", previous index: " + previousIndex);
       Assertions.assertTrue(index >= 0, "Missing term: " + term);
-      Assertions.assertTrue(index > previousIndex, "Wrong order for term: " + term);
+      Assertions.assertTrue(index > previousIndex, "Wrong order for term: " + term + " at index " + index + ", previous index: " + previousIndex);
       previousIndex = index;
     }
   }

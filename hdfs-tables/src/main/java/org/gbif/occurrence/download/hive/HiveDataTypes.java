@@ -57,6 +57,48 @@ public final class HiveDataTypes {
       "ARRAY<STRUCT<id: STRING,eventType: STRING>>";
   public static final String GEOLOGICAL_RANGE_STRUCT = "STRUCT<gt: DOUBLE,lte: DOUBLE>";
   public static final String TYPE_TIMESTAMP = "TIMESTAMP";
+  public static final String TYPE_CLASSIFICATION_STRUCT = """
+       STRUCT<
+         taxonkey: STRING,
+         scientificname: STRING,
+         acceptedtaxonkey: STRING,
+         acceptednameusageid: STRING,
+         acceptedscientificname: STRING,
+         genericname: STRING,
+         specificepithet: STRING,
+         infraspecificepithet: STRING,
+         taxonrank: STRING,
+         kingdomkey: STRING,
+         phylumkey: STRING,
+         classkey: STRING,
+         orderkey: STRING,
+         superfamilykey: STRING,
+         familykey: STRING,
+         subfamilykey: STRING,
+         tribekey: STRING,
+         subtribekey: STRING,
+         genuskey: STRING,
+         subgenuskey: STRING,
+         specieskey: STRING,
+         kingdom: STRING,
+         phylum: STRING,
+         class: STRING,
+         order: STRING,
+         superfamily: STRING,
+         family: STRING,
+         subfamily: STRING,
+         tribe: STRING,
+         subtribe: STRING,
+         genus: STRING,
+         subgenus: STRING,
+         species: STRING,
+         iucnredlistcategory: STRING,
+         taxonkeys: ARRAY<STRING>,
+         taxonomicissue: ARRAY<STRING>,
+         taxonomicstatus: STRING
+         >
+       """;
+
   // An index of types for terms, if used in the interpreted context
   public static final Map<Term, String> TYPED_TERMS;
   private static final Set<Term> ARRAY_STRING_TERMS =
@@ -77,7 +119,7 @@ public final class HiveDataTypes {
           DwcTerm.preparations,
           DwcTerm.samplingProtocol,
           GbifInternalTerm.parentEventGbifId,
-          GbifTerm.projectId,
+          DwcTerm.projectID,
           DwcTerm.higherGeography,
           DwcTerm.georeferencedBy,
           DwcTerm.associatedSequences,
@@ -231,10 +273,12 @@ public final class HiveDataTypes {
       return TYPE_MAP_OF_ARRAY_STRUCT;
     } else if (term.equals(GbifInternalTerm.taxonomicStatuses)) {
       return TYPE_MAP_STRUCT;
+    } else if (term.equals(GbifInternalTerm.taxonomicIssues)) {
+      return TYPE_MAP_OF_ARRAY_STRUCT;
     } else if (term.equals(GbifTerm.nonTaxonomicIssue)) {
       return TYPE_ARRAY_STRING;
     } else if (term.equals(GbifTerm.taxonomicIssue)) {
-      return TYPE_MAP_OF_ARRAY_STRUCT;
+      return TYPE_ARRAY_STRING;
     } else if (term.equals(GbifInternalTerm.classificationDetails)) {
       return TYPE_MAP_OF_MAP_STRUCT;
     } else {

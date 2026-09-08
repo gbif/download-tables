@@ -128,7 +128,7 @@ public class OccurrenceHDFSTableDefinition {
             Map.entry(GbifInternalTerm.installationKey, columnFor(GbifInternalTerm.installationKey)),
             Map.entry(GbifInternalTerm.institutionKey, columnFor(GbifInternalTerm.institutionKey)),
             Map.entry(GbifInternalTerm.collectionKey, columnFor(GbifInternalTerm.collectionKey)),
-            Map.entry(GbifTerm.projectId, columnFor(GbifTerm.projectId)),
+            Map.entry(DwcTerm.projectID, columnFor(DwcTerm.projectID)),
             Map.entry(GbifInternalTerm.programmeAcronym, columnFor(GbifInternalTerm.programmeAcronym)),
             Map.entry(GbifInternalTerm.hostingOrganizationKey, columnFor(GbifInternalTerm.hostingOrganizationKey)),
             Map.entry(GbifInternalTerm.isInCluster, columnFor(GbifInternalTerm.isInCluster)),

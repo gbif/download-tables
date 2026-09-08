@@ -82,7 +82,7 @@ public class EventTermUtilsTest {
         DcTerm.modified,
         GbifTerm.depth,
         GbifTerm.issue,
-        GbifTerm.projectId,
+        DwcTerm.projectID,
         DwcTerm.eventType,
         DwcTerm.measurementType,
         ObisTerm.measurementTypeID);
