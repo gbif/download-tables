@@ -67,6 +67,7 @@ public final class HiveDataTypes {
          genericname: STRING,
          specificepithet: STRING,
          infraspecificepithet: STRING,
+         infragenericepithet: STRING,
          taxonrank: STRING,
          kingdomkey: STRING,
          phylumkey: STRING,
