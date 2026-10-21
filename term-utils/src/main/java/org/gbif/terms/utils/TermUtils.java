@@ -186,7 +186,8 @@ public class TermUtils {
     GbifTerm.subgenusKey,
     GbifTerm.speciesKey,
     GbifTerm.taxonomicIssue,
-    IucnTerm.iucnRedListCategory);
+    IucnTerm.iucnRedListCategory,
+    GbifTerm.environments);
 
   /**
    * The terms that are present only due to explicit interpretation.  These are often typed explicitly, such as Dates

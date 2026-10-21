@@ -67,6 +67,7 @@ public final class HiveDataTypes {
          genericname: STRING,
          specificepithet: STRING,
          infraspecificepithet: STRING,
+         infragenericepithet: STRING,
          taxonrank: STRING,
          kingdomkey: STRING,
          phylumkey: STRING,
@@ -93,6 +94,7 @@ public final class HiveDataTypes {
          subgenus: STRING,
          species: STRING,
          iucnredlistcategory: STRING,
+         environments: ARRAY<STRING>,
          taxonkeys: ARRAY<STRING>,
          taxonomicissue: ARRAY<STRING>,
          taxonomicstatus: STRING
@@ -105,6 +107,7 @@ public final class HiveDataTypes {
       Set.of(
           GbifTerm.mediaType,
           GbifTerm.issue,
+          GbifTerm.environments,
           GbifInternalTerm.networkKey,
           GbifInternalTerm.datasetCategory,
           DwcTerm.recordedByID,
