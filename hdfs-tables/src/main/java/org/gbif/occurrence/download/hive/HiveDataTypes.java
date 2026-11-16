@@ -272,17 +272,21 @@ public final class HiveDataTypes {
       } else {
         return TYPE_VOCABULARY_STRUCT;
       }
-    } else if (term.equals(GbifInternalTerm.classifications)) {
+    } else if (term.equals(GbifInternalTerm.classifications)
+        || term.equals(GbifInternalTerm.dnaClassifications)) {
       return TYPE_MAP_OF_ARRAY_STRUCT;
-    } else if (term.equals(GbifInternalTerm.taxonomicStatuses)) {
+    } else if (term.equals(GbifInternalTerm.taxonomicStatuses)
+        || term.equals(GbifInternalTerm.dnaTaxonomicStatuses)) {
       return TYPE_MAP_STRUCT;
-    } else if (term.equals(GbifInternalTerm.taxonomicIssues)) {
+    } else if (term.equals(GbifInternalTerm.taxonomicIssues)
+        || term.equals(GbifInternalTerm.dnaTaxonomicIssues)) {
       return TYPE_MAP_OF_ARRAY_STRUCT;
     } else if (term.equals(GbifTerm.nonTaxonomicIssue)) {
       return TYPE_ARRAY_STRING;
     } else if (term.equals(GbifTerm.taxonomicIssue)) {
       return TYPE_ARRAY_STRING;
-    } else if (term.equals(GbifInternalTerm.classificationDetails)) {
+    } else if (term.equals(GbifInternalTerm.classificationDetails)
+        || term.equals(GbifInternalTerm.dnaClassificationDetails)) {
       return TYPE_MAP_OF_MAP_STRUCT;
     } else {
       return TYPED_TERMS.getOrDefault(term, TYPE_STRING); // interpreted term with a registered type
