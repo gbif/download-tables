@@ -13,11 +13,10 @@
  */
 package org.gbif.occurrence.download.hive;
 
-import org.gbif.dwc.terms.DwcTerm;
 import org.gbif.dwc.terms.GbifInternalTerm;
-import org.gbif.dwc.terms.GbifTerm;
-import org.gbif.dwc.terms.ObisTerm;
 import org.gbif.dwc.terms.Term;
+
+import java.util.function.Predicate;
 
 import org.apache.avro.Schema;
 import org.junit.jupiter.api.Assertions;
@@ -31,47 +30,21 @@ public class OccurrenceAvroHdfsTableDefinitionTest {
   }
 
   @Test
-  public void hiveSchemaTest() {
-    System.out.println(OccurrenceHDFSTableDefinition.definition());
+  public void newTermsTest() {
+    assertAvroArrayStringField(OccurrenceAvroHdfsTableDefinition.avroDefinition(), GbifInternalTerm.datasetCategory);
   }
 
   @Test
-  public void newTermsTest() {
-    assertNotContainsTerm(DwcTerm.fundingAttribution);
-    assertContainsColumn("v_" + DwcTerm.fundingAttribution.simpleName().toLowerCase());
-    assertContainsTerm(DwcTerm.projectID);
-    assertContainsTerm(GbifTerm.dnaSequenceID);
-    assertContainsTerm(DwcTerm.measurementType);
-    assertContainsTerm(ObisTerm.measurementTypeID);
-    assertContainsTerm(GbifInternalTerm.datasetCategory);
-    assertTermDataType(GbifInternalTerm.datasetCategory, HiveDataTypes.TYPE_ARRAY_STRING);
-    assertAvroArrayStringField(OccurrenceAvroHdfsTableDefinition.avroDefinition(), GbifInternalTerm.datasetCategory);
-    assertNotContainsTerm(GbifInternalTerm.nucleotide_sequence);
-  }
+  public void dnaTermsTest() {
+    Schema avroSchema = OccurrenceAvroHdfsTableDefinition.avroDefinition();
 
-  private void assertContainsTerm(Term term) {
-    Assertions.assertTrue(
-      OccurrenceHDFSTableDefinition.definition().stream()
-        .anyMatch(t -> t.getColumnName().equals(term.simpleName().toLowerCase())));
-  }
-
-  private void assertNotContainsTerm(Term term) {
-    Assertions.assertTrue(
-      OccurrenceHDFSTableDefinition.definition().stream()
-        .noneMatch(t -> t.getColumnName().equals(term.simpleName().toLowerCase())));
-  }
-
-  private void assertContainsColumn(String column) {
-    Assertions.assertTrue(
-      OccurrenceHDFSTableDefinition.definition().stream()
-        .anyMatch(t -> t.getColumnName().equals(column)));
-  }
-
-  private void assertTermDataType(Term term, String dataType) {
-    Assertions.assertTrue(
-      OccurrenceHDFSTableDefinition.definition().stream()
-        .anyMatch(t -> t.getColumnName().equals(term.simpleName().toLowerCase())
-          && t.getHiveDataType().equals(dataType)));
+    assertAvroMapField(avroSchema, GbifInternalTerm.dnaClassifications, this::isStringArray);
+    assertAvroMapField(avroSchema, GbifInternalTerm.dnaTaxonomicStatuses, this::isString);
+    assertAvroMapField(avroSchema, GbifInternalTerm.dnaTaxonomicIssues, this::isStringArray);
+    assertAvroMapField(
+      avroSchema,
+      GbifInternalTerm.dnaClassificationDetails,
+      values -> values.getType() == Schema.Type.MAP && isString(values.getValueType()));
   }
 
   private void assertAvroArrayStringField(Schema schema, Term term) {
@@ -79,6 +52,22 @@ public class OccurrenceAvroHdfsTableDefinitionTest {
     Assertions.assertTrue(
       fieldSchema.getTypes().stream()
         .anyMatch(type -> type.getType() == Schema.Type.ARRAY && isNullableString(type.getElementType())));
+  }
+
+  private void assertAvroMapField(Schema schema, Term term, Predicate<Schema> valuesCheck) {
+    Schema.Field field = schema.getField(term.simpleName().toLowerCase());
+    Assertions.assertNotNull(field, "Missing Avro field for " + term.simpleName());
+    Assertions.assertTrue(
+      field.schema().getTypes().stream()
+        .anyMatch(type -> type.getType() == Schema.Type.MAP && valuesCheck.test(type.getValueType())));
+  }
+
+  private boolean isString(Schema schema) {
+    return schema.getType() == Schema.Type.STRING;
+  }
+
+  private boolean isStringArray(Schema schema) {
+    return schema.getType() == Schema.Type.ARRAY && isString(schema.getElementType());
   }
 
   private boolean isNullableString(Schema schema) {
